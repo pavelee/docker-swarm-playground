@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+    node1:
+        container_name: "node1"
+        build:
+            context: ./
+        privileged: true
+        init: true
+
+    node2:
+        container_name: "node2"
+        build:
+            context: ./
+        privileged: true
+        init: true
+
+    node3:
+        container_name: "node3"
+        build:
+            context: ./
+        privileged: true
+        init: true
