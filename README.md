@@ -1,5 +1,7 @@
 # Docker Swarm Playground!
 
+* [What is it?](#what-is-it)
+
 ## What is it?
 It is simple way to build docker swarm playground using docker containers imitating virutal machines.
 
