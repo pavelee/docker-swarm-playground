@@ -1,22 +1,26 @@
 version: "3.9"
 
 services:
-    node1:
-        container_name: "node1"
+    machine1:
+        container_name: "manager"
+        build:
+            context: ./
+        privileged: true
+        init: true
+        volumes:
+            - './stack:/stack'
+        ports:
+            - "9000:9000" # Portainer
+
+    machine2:
+        container_name: "worker1"
         build:
             context: ./
         privileged: true
         init: true
 
-    node2:
-        container_name: "node2"
-        build:
-            context: ./
-        privileged: true
-        init: true
-
-    node3:
-        container_name: "node3"
+    machine3:
+        container_name: "worker2"
         build:
             context: ./
         privileged: true
