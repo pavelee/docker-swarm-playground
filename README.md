@@ -11,7 +11,9 @@ Each machine is dind container imitaing virutal machine within docker installed.
 
 ## Fast start/restart your cluster
 You can start/restart cluster in seconds by simple running python script
-
+~~~
+python3 setup.py
+~~~
 It just simple automated job to help you experience like a madman!
 
 ## Deploy cluster monitoring stack, be like a pro!
