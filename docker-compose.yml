@@ -25,3 +25,10 @@ services:
             context: ./
         privileged: true
         init: true
+
+    machine4:
+        container_name: "worker3"
+        build:
+            context: ./
+        privileged: true
+        init: true

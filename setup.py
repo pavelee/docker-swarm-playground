@@ -18,7 +18,7 @@ print('IP manager: ' + ip)
 
 print('\nJoin all nodes\n')
 
-workersToJoin = ['worker1', 'worker2']
+workersToJoin = ['worker1', 'worker2', 'worker3']
 for worker in workersToJoin:
     command = 'docker exec %s docker swarm join --token %s %s' % (worker, token, ip)
     r = subprocess.getoutput(command)
