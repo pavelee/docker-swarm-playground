@@ -11,6 +11,7 @@ services:
             - './stack:/stack'
         ports:
             - "9000:9000" # Portainer
+            - "8080:8080" # Swarmpit
 
     machine2:
         container_name: "worker1"
