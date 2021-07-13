@@ -10,8 +10,7 @@ services:
         volumes:
             - './stack:/stack'
         ports:
-            - "9000:9000" # Portainer
-            - "8080:8080" # Swarmpit
+            - "9000-9100:9000-9100"
 
     machine2:
         container_name: "worker1"
