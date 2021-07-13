@@ -1,0 +1,17 @@
+version: '3.2'
+
+services:
+  grafana:
+    image: grafana/grafana
+    volumes: 
+      - grafana-data:/var/lib/grafana
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+    ports:
+      - 9020:3000
+
+volumes:
+  grafana-data:
+
