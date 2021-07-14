@@ -9,8 +9,6 @@ services:
         init: true
         volumes:
             - './stack:/stack'
-        ports:
-            - "9000-9100:9000-9100"
 
     machine2:
         container_name: "worker1"
