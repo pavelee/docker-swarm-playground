@@ -3,14 +3,62 @@ version: '3.2'
 services:
   grafana:
     image: grafana/grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SECURITY_ADMIN_USER: admin
+      GF_PATHS_PROVISIONING: /etc/grafana/provisioning/
     volumes: 
       - grafana-data:/var/lib/grafana
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana/swarmprom_dashboards.yml:/etc/grafana/provisioning/dashboards/swarmprom_dashboards.yml
+      - ./grafana/dashboards:/etc/grafana/dashboards
     deploy:
       placement:
         constraints:
           - node.role == manager
     ports:
       - 9020:3000
+
+  # cadvisor:
+  #     image: google/cadvisor:latest
+  #     volumes:
+  #     - /:/rootfs:ro
+  #     - /var/run:/var/run:rw
+  #     - /sys:/sys:ro
+  #     - /var/lib/docker/:/var/lib/docker:ro
+  #     deploy:
+  #       placement:
+  #         constraints:
+  #           - node.role == manager
+
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager  
+
+  node-exporter:       
+    image: prom/node-exporter
+    environment:
+      - NODE_ID={{.Node.ID}}       
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /etc/hostname:/etc/nodename
+    command:
+      - '--path.sysfs=/host/sys'
+      - '--path.procfs=/host/proc'
+      - '--collector.textfile.directory=/etc/node-exporter/'
+      - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+      - '--no-collector.ipvs'
+    deploy:
+      mode: global      
 
 volumes:
   grafana-data:
