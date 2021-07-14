@@ -2,9 +2,12 @@ import urllib.request, time, sys
 
 address = sys.argv[1]
 try:
-    interval = sys.argv[2]
+    interval = float(sys.argv[2])
 except IndexError:
     interval = 0.1
+
+# print(interval)
+# exit()
 
 while 1:
     try:
